@@ -1,0 +1,23 @@
+# File: .github/workflows/github-repo-sync.yml
+name: GitHub Repo Sync
+
+on:
+  # schedule:
+  # - cron:  "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - name: GitHub Repo Sync
+      uses: repo-sync/github-sync@v2.3.0
+      with:
+        source_repo: "https://github.com/Jstarfish/JavaKeeper.git"
+        source_branch: "*"
+        destination_branch: "*"
+        sync_tags: "true"
+        github_token: ${{ secrets.PAT }}
